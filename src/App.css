@@ -1,0 +1,83 @@
+body{
+  background-image: repeating-radial-gradient(circle at center center, transparent 0px, transparent 2px,rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 3px,transparent 3px, transparent 5px,rgba(0,0,0,0.03) 5px, rgba(0,0,0,0.03) 7px),repeating-radial-gradient(circle at center center, rgb(255,255,255) 0px, rgb(255,255,255) 9px,rgb(255,255,255) 9px, rgb(255,255,255) 21px,rgb(255,255,255) 21px, rgb(255,255,255) 31px,rgb(255,255,255) 31px, rgb(255,255,255) 40px); background-size: 20px 20px;
+}
+a{
+  text-decoration: none;
+}
+input{
+  width: 25vw !important;
+}
+.fa-heart{
+ color:rgb(173, 4, 33)
+}
+.fa-right-to-bracket{
+  color: blue;
+}
+.fa-cart-shopping{
+  color:rgb(30, 115, 30);
+}
+.footer-items ul li{
+  color:#fff;
+  list-style: none;
+  line-height: 180%;
+  
+}
+.footer-items ul li:first-child{
+  font-weight: bold;
+  
+  margin-bottom: 10px;
+  text-decoration: underline;
+  text-decoration-color: #625f5f;
+}
+.navbar-brand{
+  padding: 42%;
+}
+.social{
+  width:40% !important;
+  
+}
+.fa-brands{
+  font-size: 20px;
+}
+.footer-items{
+  display: flex;
+  justify-content: space-evenly;
+}
+a.active .btn{
+  color:rgb(69, 69, 205);
+  background-color: lightgray;
+  border:none;
+}
+.login{
+  margin-left: 45% !important;
+}
+.register{
+  margin-left: 25% !important;
+}
+.signup{
+  margin-left: 45% !important;
+}
+.google{
+  margin-left: 40% !important;
+}
+.fa-truck-fast{
+  color: rgb(106, 106, 2);
+}
+.sticky{
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.sidebar {
+  position: sticky  ;
+  top: 60px;
+  padding-top: 20px;
+}
+@media (max-width: 768px){
+  .sidebar{
+    display: flex;
+    overflow: hidden;
+  }
+}
