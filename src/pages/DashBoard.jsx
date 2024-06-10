@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 const DashBoard = () => {
   const [info, setInfo]=useState([]);
+  const [wishhome, setWishhome] = useState([]);
 
      useEffect(() => {
        fetch(`https://dummyjson.com/products`)
@@ -10,11 +11,22 @@ const DashBoard = () => {
        .then((data) =>setInfo(data.products.reverse()))
      },[])
       
-     function handleWishlist(e){
+     function handleWishlist(info, e) {
       e.preventDefault();
+      e.stopPropagation();
       const button = e.target;
-     button.classList.toggle('fw-bold');
-   }
+      button.classList.toggle('fw-bold');
+      setWishhome((prevWishlist) => {
+        if (prevWishlist.some(item => item.id === info.id)) {
+          return prevWishlist.filter(item => item.id !== info.id);
+        } else {
+          return [...prevWishlist, info];
+        }
+      });
+    }
+    useEffect(()=>{
+    sessionStorage.setItem("home",JSON.stringify(wishhome));
+    },[wishhome])
   return (
     <>
     <h4 className='fw-bold py-3 rounded'style={{ position: 'sticky', top: '65px', width: '100%', backgroundColor: '#ffffff', zIndex: 1000 ,fontFamily:'monospace'}}>products<i className="fa-solid fa-turn-down text-secondary opacity-25 ms-1"></i></h4>
@@ -27,7 +39,7 @@ const DashBoard = () => {
             <Link to={`/product-details/${info.id}`} className='text-decoration-none'>
             <div className="card mt-2 position-relative " style={{width: '18rem', gap:'5px',height:'100%'}}>
           <img src={info.thumbnail} className="card-img-top p-2" alt="..." style={{ height: '50%', objectFit: 'fit' }}></img>
-          <button className="btn bg-light position-absolute top-0 end-0 m-2" onClick={handleWishlist}><i className="fa-regular fa-heart text-danger"></i></button>
+          <button className="btn bg-light position-absolute top-0 end-0 m-2" onClick={(e) => handleWishlist(info, e)}><i className="fa-regular fa-heart text-danger"></i></button>
         <div className="card-body">
           <h5 className="card-title text-center">{info.title}</h5>
           <p className="card-text text-center">{info.description}</p>

@@ -2,6 +2,7 @@
 import { useEffect,useState } from 'react';
 import { useParams ,Link} from 'react-router-dom';
 import { Carousel } from 'react-bootstrap';
+import swal from 'sweetalert';
 const Detailed = () => {
      const [Qty,setQty]= useState(1);
      const[random ,setRandom] = useState([]);
@@ -17,7 +18,29 @@ const Detailed = () => {
         const [item,setItem]= useState([]);
         const {ID} = useParams();
         const TotalPrice= item.price * Qty;
+        function showAlert() {
+          swal({
+              title: "Good job!",
+              text: "You clicked the button! Redirecting to home in 10 seconds.",
+              icon: "success",
+              buttons: {
+                  cancel: "Close",
+                  home: {
+                      text: "Go to Home",
+                      value: "home",
+                  }
+              }
+          }).then((value) => {
+              if (value === "home") {
+                  window.location.href = "home"; // Replace "home" with the URL of your home page
+              }
+          });
 
+          // Automatic redirect after 10 seconds
+          setTimeout(() => {
+              window.location.href = "home"; // Replace "home" with the URL of your home page
+          }, 10000);
+      }
     useEffect(()=>{
         fetch(`https://dummyjson.com/products/${ID}`)
         .then((res)=>res.json())
@@ -67,8 +90,28 @@ const Detailed = () => {
               <Link to='/payment'><button  className="btn btn-primary px-5 text-white ms-3 fw-bold">Buy Now <i className="fa-solid fa-sack-dollar"></i></button></Link>
             </div>
           </div>
+            <div ><h3 className='fw-bold text-secondary text-center mt-2'>Rating & Reviews -</h3></div>
+  
+            {
+  item.reviews && (
+    <div>
+      <h5 className='fw-bold ms-5'>Customer reviews( {item.reviews.length})</h5>
+      {item.reviews.map((review) => (
+        <div key={review.id} className='ms-5'>
+          <p className='fw-bold'><i className="fa-solid fa-user"></i> {review.reviewerName}</p>
+          <p className='fw-semibold'>{review.comment}</p>
+          <p className='fw-bold text-secondary'>Rating: <i className='fas fa-star fw-bold text-warning'></i>{review.rating}</p>
+          <small>Date: {review.date}</small>
+          <hr />
         </div>
-        
+      ))}
+    </div>
+  )
+}
+
+
+<button onClick={showAlert}>sweet</button>
+        </div>
      } 
       <div>
       {

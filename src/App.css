@@ -4,6 +4,28 @@ body{
 a{
   text-decoration: none;
 }
+.navlogo:hover{
+  border: 1px solid grey;
+  padding: 2px;
+}
+.loginpage{
+  background-image: url(./assets/market.jpg);
+  background-size:cover;
+  background-position: 20%;
+  height:90vh;
+  border-radius: 20px;
+}
+.unq:hover{
+  background-image: url(./assets/kitchen.jpeg);
+  background-size: cover;
+  background-position: 20%;
+  background-repeat: no-repeat;
+  opacity: 0.7;
+  color:white !important;
+}
+.ep{
+  background-image: repeating-radial-gradient(circle at center center, transparent 0px, transparent 2px,rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 3px,transparent 3px, transparent 5px,rgba(0,0,0,0.03) 5px, rgba(0,0,0,0.03) 7px),repeating-radial-gradient(circle at center center, rgb(255,255,255) 0px, rgb(255,255,255) 9px,rgb(255,255,255) 9px, rgb(255,255,255) 21px,rgb(255,255,255) 21px, rgb(255,255,255) 31px,rgb(255,255,255) 31px, rgb(255,255,255) 40px); background-size: 20px 20px;
+}
 input{
   width: 25vw !important;
 }
@@ -21,6 +43,17 @@ input{
   list-style: none;
   line-height: 180%;
   
+}
+.custom-focus:focus {
+  border-color: #198754; 
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+}
+
+.registration{
+  background-image: url(./assets/shop.jpg);
+  background-size: cover;
+  height: 90vh;
+  border-radius: 20px;
 }
 .footer-items ul li:first-child{
   font-weight: bold;
@@ -44,9 +77,11 @@ input{
   justify-content: space-evenly;
 }
 a.active .btn{
-  color:rgb(69, 69, 205);
-  background-color: lightgray;
-  border:none;
+  background-image: url(./assets/kitchen.jpeg);
+  background-size: cover;
+  background-position: 20%;
+  background-repeat: no-repeat;
+  color:white !important;
 }
 .login{
   margin-left: 45% !important;
@@ -54,9 +89,7 @@ a.active .btn{
 .register{
   margin-left: 25% !important;
 }
-.signup{
-  margin-left: 45% !important;
-}
+
 .google{
   margin-left: 40% !important;
 }

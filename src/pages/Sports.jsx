@@ -7,6 +7,7 @@ const Sports = () => {
 
     const [products, setProducts] = useState([]);
     const [wishlists, setWishlists] = useState([]);
+    const [sportscart, setSportscart] = useState([]);
     
     useEffect(() => {
         fetch(`https://dummyjson.com/products/category/sports-accessories`)
@@ -19,7 +20,6 @@ const Sports = () => {
         e.stopPropagation();
         const button = e.target;
         button.classList.toggle('fw-bold');
-        sessionStorage.setItem("wishlist",JSON.stringify(wishlists));
         setWishlists((prevWishlist) => {
             if (prevWishlist.some(item => item.id === info.id)) {
                 return prevWishlist.filter(item => item.id !== info.id);
@@ -28,6 +28,26 @@ const Sports = () => {
             }
         });
     }
+    function handleCart(info, e) {
+        e.preventDefault();
+        setSportscart((prevCart) => {
+            if (prevCart.some(cartItem => cartItem.id === info.id)) {
+                return prevCart;
+            } else {
+                return [...prevCart, info];
+            }
+        });
+
+        const button = e.target;
+        button.textContent = 'Added!';
+        button.disabled = true;
+    }
+    useEffect(()=>{
+        sessionStorage.setItem("sports",JSON.stringify(wishlists));
+    },[wishlists])
+    useEffect(()=>{
+        sessionStorage.setItem("sportscart",JSON.stringify(sportscart));
+    },[sportscart])
 
     return (
         <>
@@ -48,7 +68,7 @@ const Sports = () => {
                                     <h5 className="card-title text-center">{info.title}<span className='bg-secondary-subtle rounded m-2 p-1 text-nowrap'>{info.rating}<i className='fa fa-star text-warning'></i></span></h5>
                                     <p className="card-text text-center">{info.description}</p>
                                     <p className='fw-bold text-center'>price :<span className='text-success'>${info.price}</span></p>
-                                    <button className="btn btn-warning px-3 text-dark fw-bold">Add to cart</button>
+                                    <button className="btn btn-warning px-3 text-dark fw-bold" onClick={(e) => handleCart(info, e)}>Add to cart</button>
                                     <button className="btn btn-primary px-4 text-white ms-3 fw-bold">Buy Now</button>
                                 </div>
                             </div>

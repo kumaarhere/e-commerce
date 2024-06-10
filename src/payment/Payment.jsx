@@ -1,12 +1,14 @@
 import { useState } from 'react'
 // import Razorpay from 'react-razorpay';
 // import './App.css'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 function App() {
   const [isEnabled, setIsEnabled] = useState(false);
   const navigate= useNavigate();
+  const location= useLocation();
   const handleRadioChange = (event) => {
     if (event.target.value === 'RazorPay') {
       setIsEnabled(true);
@@ -17,7 +19,8 @@ function App() {
 
   const handleButtonClick = () => {
     console.log('Button Clicked! isEnabled:', isEnabled);
-    const amount = 1000;
+    const amount = parseInt(location.state)*8200;
+    console.log(amount);
     const logo = '../assets/navlogo.png';
     const userDetails = {
       fullName: 'Kumaar Kandugula',
@@ -37,9 +40,9 @@ function App() {
     image: logo,
     handler: function (response) {
     
-    alert(response.razorpay_payment_id);
-    navigate("/track-your-order");
-  
+      navigate("/track-your-order");
+      toast.success("Order placed successfully");
+      toast.info(response.razorpay_payment_id);
     
     
     },

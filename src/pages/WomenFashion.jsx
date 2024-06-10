@@ -9,6 +9,7 @@ const WomenFashion = () => {
     const [womenWatches, setWomenWatches]=useState([]);
     const [womenjewels, setWomenJewels]=useState([]);
     const [tops, settops]=useState([]);
+    const [wishwomenfashion, setWomenFashion]=useState([]);
 
     async function FetchData(){
         const [data1, data2, data3,data4,data5,data6] = await Promise.all([
@@ -37,11 +38,22 @@ const WomenFashion = () => {
        FetchData();
      },[])
     
-     function handleWishlist(e){
+     function handleWishlist(info, e) {
       e.preventDefault();
+      e.stopPropagation();
       const button = e.target;
-     button.classList.toggle('fw-bold');
-   }
+      button.classList.toggle('fw-bold');
+      setWomenFashion((prevWishlist) => {
+        if (prevWishlist.some(item => item.id === info.id)) {
+          return prevWishlist.filter(item => item.id !== info.id);
+        } else {
+          return [...prevWishlist, info];
+        }
+      });
+    }
+    useEffect(()=>{
+    sessionStorage.setItem("womenfashion",JSON.stringify(wishwomenfashion));
+    },[wishwomenfashion])
   return (
     <>
        <h4 className='fw-bold py-3  rounded'style={{ position: 'sticky', top: '65.5px', width: '99%', backgroundColor: '#ffffff', zIndex: 1000 ,fontFamily:'monospace'}}>Women&apos;s Fashion<i className="fa-solid fa-turn-down text-secondary opacity-25 ms-1"></i></h4>
@@ -54,7 +66,7 @@ const WomenFashion = () => {
             <Link to={`/product-details/${info.id}`} className='text-decoration-none'>
             <div className="card mt-1 position-relative" style={{width: '18rem', gap:'10px',height:'100%'}}>
           <img src={info.thumbnail} className="card-img-top p-2" alt="..." style={{ height: '50%', objectFit: 'fit' }}></img>
-          <button className="btn bg-light position-absolute top-0 end-0 m-2" onClick={handleWishlist}><i className="fa-regular fa-heart text-danger"></i></button>
+          <button className="btn bg-light position-absolute top-0 end-0 m-2" onClick={(e) => handleWishlist(info, e)}><i className="fa-regular fa-heart text-danger"></i></button>
         <div className="card-body">
           <h5 className="card-title text-center">{info.title}</h5>
           <p className="card-text text-center">{info.description}</p>
@@ -77,7 +89,7 @@ const WomenFashion = () => {
             <Link to={`/product-details/${info.id}`} className='text-decoration-none'>
             <div className="card mt-1 position-relative" style={{width: '18rem', gap:'10px',height:'100%'}}>
           <img src={info.thumbnail} className="card-img-top p-2" alt="..."style={{ height: '50%', objectFit: 'cover' }}></img>
-          <button className="btn bg-light position-absolute top-0 end-0 m-2" onClick={handleWishlist}><i className="fa-regular fa-heart text-danger"></i></button>
+          <button className="btn bg-light position-absolute top-0 end-0 m-2" onClick={(e) => handleWishlist(info, e)}><i className="fa-regular fa-heart text-danger"></i></button>
         <div className="card-body">
           <h5 className="card-title text-center">{info.title}</h5>
           <p className="card-text text-center">{info.description}</p>
@@ -100,7 +112,7 @@ const WomenFashion = () => {
             <Link to={`/product-details/${info.id}`} className='text-decoration-none'>
             <div className="card mt-1 position-relative" style={{width: '18rem', gap:'10px',height:'100%'}}>
           <img src={info.thumbnail} className="card-img-top p-2" alt="..." style={{ height: '50%', objectFit: 'fit' }}></img>
-          <button className="btn bg-light position-absolute top-0 end-0 m-2" onClick={handleWishlist}><i className="fa-regular fa-heart text-danger"></i></button>
+          <button className="btn bg-light position-absolute top-0 end-0 m-2" onClick={(e) => handleWishlist(info, e)}><i className="fa-regular fa-heart text-danger"></i></button>
         <div className="card-body">
           <h5 className="card-title text-center">{info.title}</h5>
           <p className="card-text text-center">{info.description}</p>
@@ -123,7 +135,7 @@ const WomenFashion = () => {
             <Link to={`/product-details/${info.id}`} className='text-decoration-none'>
             <div className="card mt-1 position-relative" style={{width: '18rem', gap:'10px',height:'100%'}}>
           <img src={info.thumbnail} className="card-img-top p-2" alt="..." style={{ height: '50%', objectFit: 'fit' }}></img>
-          <button className="btn bg-light position-absolute top-0 end-0 m-2" onClick={handleWishlist}><i className="fa-regular fa-heart text-danger"></i></button>
+          <button className="btn bg-light position-absolute top-0 end-0 m-2" onClick={(e) => handleWishlist(info, e)}><i className="fa-regular fa-heart text-danger"></i></button>
         <div className="card-body">
           <h5 className="card-title text-center">{info.title}</h5>
           <p className="card-text text-center">{info.description}</p>
@@ -146,7 +158,7 @@ const WomenFashion = () => {
             <Link to={`/product-details/${info.id}`} className='text-decoration-none'>
             <div className="card mt-1 position-relative" style={{width: '18rem', gap:'10px',height:'100%'}}>
           <img src={info.thumbnail} className="card-img-top p-2" alt="..." style={{ height: '50%', objectFit: 'fit' }}></img>
-          <button className="btn bg-light position-absolute top-0 end-0 m-2" onClick={handleWishlist}><i className="fa-regular fa-heart text-danger"></i></button>
+          <button className="btn bg-light position-absolute top-0 end-0 m-2" onClick={(e) => handleWishlist(info, e)}><i className="fa-regular fa-heart text-danger"></i></button>
         <div className="card-body">
           <h5 className="card-title text-center">{info.title}</h5>
           <p className="card-text text-center">{info.description}</p>
@@ -169,7 +181,7 @@ const WomenFashion = () => {
             <Link to={`/product-details/${info.id}`} className='text-decoration-none'>
             <div className="card mt-1 position-relative" style={{width: '18rem', gap:'10px',height:'100%'}}>
           <img src={info.thumbnail} className="card-img-top p-2" alt="..."style={{ height: '50%', objectFit: 'cover' }}></img>
-          <button className="btn bg-light position-absolute top-0 end-0 m-2" onClick={handleWishlist}><i className="fa-regular fa-heart text-danger"></i></button>
+          <button className="btn bg-light position-absolute top-0 end-0 m-2" onClick={(e) => handleWishlist(info, e)}><i className="fa-regular fa-heart text-danger"></i></button>
         <div className="card-body">
           <h5 className="card-title text-center">{info.title}</h5>
           <p className="card-text text-center">{info.description}</p>
